@@ -71,7 +71,7 @@ class SPOConnection(models.Model):
 
         # Determine configurations for the individual companies
         __spo_conf = {}
-        for rec in self.env.company:
+        for rec in self.env.user.company_id:
             firma = rec.id
             __spo_conf[firma] = {}
 

@@ -1,4 +1,4 @@
-from odoo import http,_
+from odoo import http, _
 import logging
 import json
 import base64
@@ -6,11 +6,12 @@ from odoo.addons.web.controllers.main import Binary, serialize_exception, clean
 from odoo.http import content_disposition, dispatch_rpc, request, serialize_exception as _serialize_exception, Response
 _logger = logging.getLogger(__name__)
 
+
 class CustomMainController(Binary):
 
     @http.route('/web/binary/upload_attachment', type='http', auth="user")
     @serialize_exception
-    def upload_attachment(self, model, id, ufile, callback=None):
+    def upload_attachment(self, callback, model, id, ufile):
         files = request.httprequest.files.getlist('ufile')
         Model = request.env['ir.attachment']
         out = """<script language="javascript" type="text/javascript">
@@ -29,7 +30,8 @@ class CustomMainController(Binary):
             try:
                 attachment = Model.with_context(spo_sync=True).create({
                     'name': filename,
-                    'datas': base64.encodebytes(ufile.read()),
+                    'datas': base64.encodestring(ufile.read()),
+                    'datas_fname': filename,
                     'res_model': model,
                     'res_id': int(id)
                 })
@@ -41,7 +43,6 @@ class CustomMainController(Binary):
                 args.append({
                     'filename': clean(filename),
                     'mimetype': ufile.content_type,
-                    'id': attachment.id,
-                    'size': attachment.file_size
+                    'id': attachment.id
                 })
-        return out % (json.dumps(clean(callback)), json.dumps(args)) if callback else json.dumps(args)
+        return out % (json.dumps(clean(callback)), json.dumps(args))

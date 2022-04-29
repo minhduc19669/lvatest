@@ -6,7 +6,7 @@
             <field name="model">res.company</field>
             <field name="inherit_id" ref="base.view_company_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//form//sheet//notebook//page[@name='general_info']" position="after">
+                <xpath expr="//form//sheet//notebook//page[1]" position="after">
                     <page string="SERVER SYNC SPO CONFIG" name="spo_server_config">
                             <group>
                                 <group string="SPO CONFIG">

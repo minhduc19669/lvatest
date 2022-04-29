@@ -27,8 +27,8 @@ class IrAttachment(models.Model):
 
     def sync_file_to_spo(self, record_id, res_model, att_id, conf_conn):
         if conf_conn:
-            spo_conf = conf_conn.get_spo_config(self.env.company.id)
-            spo_conn = conf_conn.get_spo_connection(self.env.company.id)
+            spo_conf = conf_conn.get_spo_config(self.env.user.company_id.id)
+            spo_conn = conf_conn.get_spo_connection(self.env.user.company_id.id)
             folder_name = f"[{record_id.id}]_{record_id.name}".replace('/', '_'). \
                 replace('#', '_').replace(':', '_').replace('\\', '_').strip().replace(' ', '_')
             folder_exist = False
