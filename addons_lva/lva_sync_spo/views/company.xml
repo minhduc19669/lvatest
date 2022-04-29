@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_company_form_inherit" model="ir.ui.view">
+            <field name="name">view.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form//sheet//notebook//page[@name='general_info']" position="after">
+                    <page string="SERVER SYNC SPO CONFIG" name="spo_server_config">
+                            <group>
+                                <group string="SPO CONFIG">
+                                    <field name="user_of_spo"/>
+                                    <field name="password_of_spo" password="True"/>
+                                    <field name="website_spo" widget="url"/>
+                                    <field name="library"/>
+                                    <button name="check_connection_spo" type="object" string="Check connect spo" class="btn btn-primary" icon="fa-globe"/>
+                                </group>
+                            </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

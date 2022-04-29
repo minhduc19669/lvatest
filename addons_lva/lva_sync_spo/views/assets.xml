@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+        <template
+        id="assets_backend"
+        name="lva_sync_spo assets"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+                        <link
+                href="/lva_sync_spo/static/scss/document_url.scss"
+                rel="stylesheet"
+            />
+        </xpath>
+    </template>
+
+</odoo>
